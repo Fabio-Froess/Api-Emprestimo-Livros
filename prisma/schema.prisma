@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Livro {
+  id         Int          @id @default(autoincrement())
+  titulo     String
+  autor      String
+  emprestado Boolean
+  Emprestimo Emprestimo[]
+
+  @@map("livro")
+}
+
+model Pessoa {
+  id         Int          @id @default(autoincrement())
+  nome       String
+  Emprestimo Emprestimo[]
+
+  @@map("pessoa")
+}
+
+model Emprestimo {
+  id              Int      @id @default(autoincrement())
+  data_emprestimo DateTime @default(now())
+  data_devolucao  DateTime
+  livro           Livro    @relation(fields: [livroId], references: [id])
+  livroId         Int
+  pessoa          Pessoa   @relation(fields: [pessoaId], references: [id])
+  pessoaId        Int
+
+  @@map("emprestimo")
+}

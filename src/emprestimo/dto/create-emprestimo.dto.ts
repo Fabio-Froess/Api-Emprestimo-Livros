@@ -1,7 +1,7 @@
-import { IsDate, IsNumber } from 'class-validator';
+import { IsDate, IsDateString, IsNumber } from 'class-validator';
 
 export class CreateEmprestimoDto {
-  @IsDate()
+  @IsDateString()
   data_devolucao: Date;
 
   @IsNumber()

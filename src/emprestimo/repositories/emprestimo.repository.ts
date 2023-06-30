@@ -16,7 +16,12 @@ export class EmprestimoRepository {
   }
 
   async findAll(): Promise<EmprestimoEntity[]> {
-    return await this.prisma.emprestimo.findMany();
+    return await this.prisma.emprestimo.findMany({
+      include: {
+        livro: true,
+        pessoa: true,
+      },
+    });
   }
 
   async findOne(id: number): Promise<EmprestimoEntity> {

@@ -32,6 +32,18 @@ export class EmprestimoRepository {
     });
   }
 
+  async update(
+    id: number,
+    updateEmprestimoDto: CreateEmprestimoDto,
+  ): Promise<any> {
+    return this.prisma.livro.update({
+      where: {
+        id,
+      },
+      data: updateEmprestimoDto,
+    });
+  }
+
   async remove(id: number): Promise<EmprestimoEntity> {
     return this.prisma.emprestimo.delete({
       where: {
